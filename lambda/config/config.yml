@@ -1,0 +1,21 @@
+icbc:
+  drvrLastName: "palle"
+  licenceNumber: "3414792"
+  keyword: "karle"
+  expactAfterDate: "2024-05-01" #YYYY-MM-DD
+  expactBeforeDate: "2022-07-04" #YYYY-MM-DD
+  expactAfterTime: "09:00" #HH:MM
+  expactBeforeTime: "16:30" #HH:MM
+  examClass: 5 #5/7
+
+location:
+  aPosID: "269"
+  examType: "7-R-1"
+  examDate: "2024-06-25"
+  ignoreReserveTime: "false"
+  prfDaysOfWeek: "[0,1,2,3,4,5,6]"
+  prfPartsOfDay: "[0,1]"
+
+end_points:
+  appointments_end_point: "https://onlinebusiness.icbc.com/deas-api/v1/web/getAvailableAppointments"
+  login_end_point: "https://onlinebusiness.icbc.com/deas-api/v1/webLogin/webLogin"
