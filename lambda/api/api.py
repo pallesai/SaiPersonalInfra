@@ -53,5 +53,9 @@ def get_appointments(bearer_token):
         "licenseNumber": config['icbc']['licenceNumber']
     }
 
-    r = requests.post(config['end_points']['appointments_end_point'], data=json.dumps(payload), headers=headers)
-    return r.status_code, r.reason, r.text
+    response = requests.post(config['end_points']['appointments_end_point'], data=json.dumps(payload), headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    print('Authorization Error')
+    return []
