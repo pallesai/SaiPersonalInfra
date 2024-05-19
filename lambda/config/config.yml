@@ -1,7 +1,7 @@
 icbc:
-  drvrLastName: "palle"
-  licenceNumber: "3414792"
-  keyword: "karle"
+  drvrLastName: ""
+  licenceNumber: ""
+  keyword: ""
   expactAfterDate: "2024-05-01" #YYYY-MM-DD
   expactBeforeDate: "2022-07-04" #YYYY-MM-DD
   expactAfterTime: "09:00" #HH:MM
