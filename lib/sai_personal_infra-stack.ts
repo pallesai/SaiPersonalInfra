@@ -1,19 +1,15 @@
-import { Duration, Stack, StackProps } from 'aws-cdk-lib';
-import * as sns from 'aws-cdk-lib/aws-sns';
-import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import { Construct } from 'constructs';
+import { Stack, StackProps, aws_lambda as lambda } from 'aws-cdk-lib';
+import {Construct} from "constructs";
 
 export class SaiPersonalInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, 'SaiPersonalInfraQueue', {
-      visibilityTimeout: Duration.seconds(300)
+    const Lambda = new lambda.Function(this, "ICBCLambdaStack", {
+      runtime: lambda.Runtime.PYTHON_3_8,
+      handler: "main.handler",
+      code: lambda.Code.fromAsset("lambda"),
+      memorySize: 1024,
     });
-
-    const topic = new sns.Topic(this, 'SaiPersonalInfraTopic');
-
-    topic.addSubscription(new subs.SqsSubscription(queue));
   }
 }

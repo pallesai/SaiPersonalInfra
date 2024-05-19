@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import * as cdk from 'aws-cdk-lib';
 import { SaiPersonalInfraStack } from '../lib/sai_personal_infra-stack';
+import {App} from "aws-cdk-lib";
 
-const app = new cdk.App();
+const app = new App();
 new SaiPersonalInfraStack(app, 'SaiPersonalInfraStack');
