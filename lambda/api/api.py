@@ -29,7 +29,7 @@ def get_bearer_token():
         return response.headers["Authorization"]
     return ""
 
-def get_appointments(bearer_token):
+def get_appointments(location, bearer_token):
 
     headers = {
         'Content-type': 'application/json',
@@ -43,10 +43,10 @@ def get_appointments(bearer_token):
     }
 
     payload = {
-        "aPosID": config['location']['aPosID'],
-        "examType": config['location']['examType'],
-        "examDate": config['location']['examDate'],
-        "ignoreReserveTime": config['location']['ignoreReserveTime'],
+        "aPosID": location['aPosID'],
+        "examType": location['examType'],
+        "examDate": location['examDate'],
+        "ignoreReserveTime": location['ignoreReserveTime'],
         "prfDaysOfWeek": "[0,1,2,3,4,5,6]",
         "prfPartsOfDay": "[0,1]",
         "lastName": config['icbc']['drvrLastName'],
@@ -57,5 +57,6 @@ def get_appointments(bearer_token):
 
     if response.status_code == 200:
         return response.json()
-    print('Authorization Error')
-    return []
+    else:
+        print('Authorization Error')
+        return []

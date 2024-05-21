@@ -1,4 +1,4 @@
-import {aws_lambda as lambda, Stack, StackProps} from 'aws-cdk-lib';
+import {aws_lambda as lambda, Duration, Stack, StackProps} from 'aws-cdk-lib';
 import {Construct} from "constructs";
 import {Code, LayerVersion, Runtime} from "aws-cdk-lib/aws-lambda";
 import * as path from 'path';
@@ -12,6 +12,7 @@ export class SaiPersonalInfraStack extends Stack {
       handler: "main.handler",
       code: lambda.Code.fromAsset("lambda"),
       memorySize: 1024,
+      timeout: Duration.seconds(10),
       layers: [this.createLambdaLayer()]
     });
   }

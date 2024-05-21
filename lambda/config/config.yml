@@ -9,12 +9,34 @@ icbc:
   examClass: 5 #5/7
 
 location:
-  aPosID: "269"
-  examType: "7-R-1"
-  examDate: "2024-05-01"
-  ignoreReserveTime: "false"
-  prfDaysOfWeek: "[0,1,2,3,4,5,6]"
-  prfPartsOfDay: "[0,1]"
+  -
+    aPosID: "269"
+    examDate: "2024-05-25"
+    examType: "7-R-1"
+    ignoreReserveTime: "false"
+    prfDaysOfWeek: "[0,1,2,3,4,5,6]"
+    prfPartsOfDay: "[0,1]"
+  -
+    aPosID: "11"
+    examDate: "2024-05-25"
+    examType: "7-R-1"
+    ignoreReserveTime: "false"
+    prfDaysOfWeek: "[0,1,2,3,4,5,6]"
+    prfPartsOfDay: "[0,1]"
+  -
+    aPosID: "281"
+    examDate: "2024-05-25"
+    examType: "7-R-1"
+    ignoreReserveTime: "false"
+    prfDaysOfWeek: "[0,1,2,3,4,5,6]"
+    prfPartsOfDay: "[0,1]"
+  -
+    aPosID: "271"
+    examDate: "2024-05-25"
+    examType: "7-R-1"
+    ignoreReserveTime: "false"
+    prfDaysOfWeek: "[0,1,2,3,4,5,6]"
+    prfPartsOfDay: "[0,1]"
 
 end_points:
   appointments_end_point: "https://onlinebusiness.icbc.com/deas-api/v1/web/getAvailableAppointments"

@@ -11,13 +11,15 @@ DATE_FORMAT = "%Y-%m-%d"
 with open('config/config.yml', 'r') as file:
     config = yaml.safe_load(file)
 
+
 def new_date_found(appointment):
     # check for new availability
     appointment_date = appointment["appointmentDt"]["date"]
     new_date = datetime.strptime(appointment_date, DATE_FORMAT)
-    before_date = datetime.strptime(config['location']['examDate'], DATE_FORMAT)
+    before_date = datetime.strptime(config['icbc']['expactAfterDate'], DATE_FORMAT)
 
     return new_date <= before_date
+
 
 def create_email_body(matching_appointments):
     body = "<h1>Available appointments</h1>"
@@ -30,26 +32,34 @@ def create_email_body(matching_appointments):
         body += f"-------------------------------------------------------- <br>"
     return body
 
+
 def run():
     token = get_bearer_token()
-    appointments = get_appointments(token)
+
+    checking_time = datetime.now()
+    locations = config['location']
     new_appointments = []
 
-    for appointment in appointments:
-        if new_date_found(appointment):
-            new_appointments.append(appointment)
-            print('New appointment found', appointment)
-        else:
-            print('Appointment did not satisfy requirements ', appointment)
+    print('Checking appointments at ', checking_time)
 
-        if len(new_appointments) != 0:
-            subject = 'ICBC bot notification'
-            body = create_email_body(new_appointments)
-            sender = ''
-            receipients = []
-            password = ''
+    for location in locations:
+        appointments = get_appointments(location, token)
 
-            email_client.send_email(subject, body, sender, receipients, password)
+        for appointment in appointments:
+            if new_date_found(appointment):
+                new_appointments.append(appointment)
+                print('New appointment found', appointment)
+
+    print(len(new_appointments), ' appointments found at', checking_time)
+
+    if len(new_appointments) != 0:
+        subject = 'ICBC bot notification'
+        body = create_email_body(new_appointments)
+        sender = ''
+        receipients = []
+        password = ''
+
+        email_client.send_email(subject, body, sender, receipients, password)
 
 def handler(event, context):
     run()
